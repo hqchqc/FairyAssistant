@@ -1,0 +1,13 @@
+{
+  "miniprogramRoot": "./",
+  "projectname": "assistantForFairy",
+  "description": "💘燕燕子的小助手",
+  "appid": "touristappid",
+  "setting": {
+    "urlCheck": true,
+    "es6": false,
+    "postcss": false,
+    "minified": false
+  },
+  "compileType": "miniprogram"
+}
