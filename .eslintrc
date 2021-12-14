@@ -4,6 +4,10 @@
     "react/jsx-uses-react": "off",
     "react/react-in-jsx-scope": "off",
     "quotes": [0, "single"],
-    "jsx-quotes": [2, "prefer-double"]
+    "jsx-quotes": [2, "prefer-double"],
+    "node": true,
+    "es6": true,
+    "commonjs": true,
+    "browser": true
   }
 }

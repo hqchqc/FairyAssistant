@@ -3,32 +3,32 @@
 module.exports = {
   presets: [
     [
-      "taro",
+      'taro',
       {
-        framework: "react",
+        framework: 'react',
         ts: true,
       },
     ],
   ],
   plugins: [
     [
-      "import",
+      'import',
       {
-        libraryName: "@taroify/core",
-        libraryDirectory: "",
+        libraryName: '@taroify/core',
+        libraryDirectory: '',
         style: true,
       },
-      "@taroify/core",
+      '@taroify/core',
     ],
     [
-      "import",
+      'import',
       {
-        libraryName: "@taroify/icons",
-        libraryDirectory: "",
+        libraryName: '@taroify/icons',
+        libraryDirectory: '',
         camel2DashComponentName: false,
-        style: () => "@taroify/icons/style",
+        style: () => '@taroify/icons/style',
       },
-      "@taroify/icons",
+      '@taroify/icons',
     ],
   ],
 };
