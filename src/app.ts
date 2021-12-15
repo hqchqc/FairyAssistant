@@ -1,3 +1,4 @@
+import Taro from '@tarojs/taro';
 import { Component } from 'react';
 import sr from 'sr-sdk-wxapp';
 
@@ -49,7 +50,13 @@ sr.init({
 });
 
 class App extends Component {
-  componentDidMount() {}
+  componentDidMount() {
+    if (process.env.TARO_ENV === 'weapp') {
+      Taro.cloud.init({
+        env: 'cloud1-5gj5t7w004a5cddc', // 云开发环境ID
+      });
+    }
+  }
 
   componentDidShow() {}
 
