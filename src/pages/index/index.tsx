@@ -34,6 +34,19 @@ const Index: React.FC<IndexProps> = () => {
       });
   }, []);
 
+  useEffect(() => {
+    const db = Taro.cloud.database();
+    // const cloudDB = Taro.cloud.database({
+    //   env: 'cloud1-5gj5t7w004a5cddc',
+    // });
+    db.collection('dailyRecord')
+      .doc('c0ca0aed61bb34c90099adaf09821208')
+      .get({
+        success: res => console.log(res),
+        fail: err => console.log(err, 12),
+      });
+  }, []);
+
   const handleFormatter = (day: Calendar.DayObject) => {
     const month = day.value.getMonth() + 1;
     const date = day.value.getDate();
@@ -121,6 +134,7 @@ const Index: React.FC<IndexProps> = () => {
         block
         variant="outlined"
         style={{ width: '100px', margin: '20px auto' }}
+        onClick={() => console.log(fieldValue)}
       >
         确认
       </Button>
