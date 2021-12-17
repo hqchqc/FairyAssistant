@@ -25,25 +25,15 @@ const Index: React.FC<IndexProps> = () => {
       .callFunction({
         name: 'login',
         data: {
-          a: 1,
-          b: 2,
+          a: 31,
+          b: 111,
         },
       })
       .then(res => {
+        // res.ress.then(a => {
+        //   console.log(a);
+        // });
         console.log(res);
-      });
-  }, []);
-
-  useEffect(() => {
-    const db = Taro.cloud.database();
-    // const cloudDB = Taro.cloud.database({
-    //   env: 'cloud1-5gj5t7w004a5cddc',
-    // });
-    db.collection('dailyRecord')
-      .doc('c0ca0aed61bb34c90099adaf09821208')
-      .get({
-        success: res => console.log(res),
-        fail: err => console.log(err, 12),
       });
   }, []);
 
