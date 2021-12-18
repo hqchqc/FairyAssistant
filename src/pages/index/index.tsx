@@ -2,6 +2,7 @@ import { Calendar, Cell, Field, Popup, Picker, Button } from '@taroify/core';
 import { ArrowRight } from '@taroify/icons';
 import { View } from '@tarojs/components';
 import Taro from '@tarojs/taro';
+import dayjs from 'dayjs';
 import { useEffect, useState } from 'react';
 import './index.less';
 
@@ -19,39 +20,63 @@ const Index: React.FC<IndexProps> = () => {
   const [value, setValue] = useState<Date>();
   const [fieldValue, setFieldValue] = useState<string>('');
   const [openPicker, setOpenPicker] = useState<boolean>(false);
+  const [dayUse, setDayUse] = useState<string[]>([]);
 
   useEffect(() => {
     Taro.cloud
       .callFunction({
-        name: 'login',
+        name: 'dbRun',
         data: {
-          a: 31,
-          b: 111,
+          type: 'get',
+          db: 'dailyRecord',
+          data: {},
         },
       })
       .then(res => {
-        // res.ress.then(a => {
-        //   console.log(a);
-        // });
         console.log(res);
+        if (res.errMsg === 'cloud.callFunction:ok' && res.result) {
+          setDayUse(res?.result['data']);
+        } else {
+          console.log(res, '210');
+        }
       });
   }, []);
 
   const handleFormatter = (day: Calendar.DayObject) => {
-    const month = day.value.getMonth() + 1;
     const date = day.value.getDate();
+    const month = day.value.getMonth() + 1;
 
-    if (month === 12) {
-      if (date === 14) {
-        day.children = day.children = (
-          <text className="iconfont">&#xe606;</text>
-        );
-      } else if (date === 15) {
-        day.children = <text className="iconfont">&#xe608;</text>;
+    dayUse.map(item => {
+      const dayItem = item['date'].substring(item['date'].lastIndexOf('-') + 1);
+      if (date === Number(dayItem)) {
+        day.children =
+          item['type'] === 'A' ? (
+            <text className="iconfont">&#xe606;</text>
+          ) : (
+            <text className="iconfont">&#xe608;</text>
+          );
       }
-    }
+    });
 
     return day;
+  };
+
+  const handleSubmit = (fieldValue: string) => {
+    Taro.cloud
+      .callFunction({
+        name: 'dbRun',
+        data: {
+          type: 'insert',
+          db: 'dailyRecord',
+          data: {
+            type: fieldValue,
+            date: dayjs().format('YYYY-MM-DD'),
+          },
+        },
+      })
+      .then(res => {
+        console.log(res, '--11-1111111--12-');
+      });
   };
 
   return (
@@ -124,7 +149,7 @@ const Index: React.FC<IndexProps> = () => {
         block
         variant="outlined"
         style={{ width: '100px', margin: '20px auto' }}
-        onClick={() => console.log(fieldValue)}
+        onClick={() => handleSubmit(fieldValue[0])}
       >
         确认
       </Button>
