@@ -1,5 +1,21 @@
 @import '../../assets/iconfont/iconfont.less';
 
-.taroify-calendar__header-title {
-  display: none;
+.monthUse::before {
+  content: '';
+  display: inline-block;
+  height: 30px;
+  border-right: 5px solid #f9a7a5;
+  position: relative;
+  right: 50px;
+  top: 20px;
+}
+
+.monthUse::after {
+  content: '';
+  display: inline-block;
+  height: 30px;
+  border-left: 5px solid #f9a7a5;
+  position: relative;
+  left: 80px;
+  top: -20px;
 }
