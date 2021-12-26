@@ -1,21 +1,47 @@
 @import '../../assets/iconfont/iconfont.less';
 
-.monthUse::before {
-  content: '';
-  display: inline-block;
-  height: 30px;
-  border-right: 5px solid #f9a7a5;
-  position: relative;
-  right: 50px;
-  top: 20px;
-}
+.totalNum {
+  width: 85%;
+  margin: 15px;
+  padding: 30px 10px;
+  line-height: 48px;
+  font-size: 24px;
+  text-align: center;
+  background-color: #fff;
+  border: 1px solid #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 0 3px #ccc;
 
-.monthUse::after {
-  content: '';
-  display: inline-block;
-  height: 30px;
-  border-left: 5px solid #f9a7a5;
-  position: relative;
-  left: 80px;
-  top: -20px;
+  .totalDetail {
+    text:nth-child(1) {
+      font-weight: 400;
+    }
+    text:nth-child(2) {
+      color: #f9a7a5;
+      font-weight: 800;
+    }
+    text:nth-child(3) {
+      font-size: 25px;
+    }
+  }
+
+  .totalDetail:nth-child(2)::before {
+    position: relative;
+    top: 33px;
+    right: 40px;
+    display: inline-block;
+    height: 30px;
+    border-right: 5px solid #f9a7a5;
+    content: '';
+  }
+
+  .totalDetail:nth-child(2)::after {
+    position: relative;
+    top: -15px;
+    left: 60px;
+    display: inline-block;
+    height: 30px;
+    border-left: 5px solid #f9a7a5;
+    content: '';
+  }
 }
