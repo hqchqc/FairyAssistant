@@ -1,5 +1,16 @@
 @import '../../assets/iconfont/iconfont.less';
 
+.background {
+  background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAACFJREFUeNpiZGBg4GegAsBlCD8TqSYNQg2Mo6FEBAAIMACdPABtrSW/IQAAAABJRU5ErkJggg==');
+  background-repeat: repeat;
+  background-attachment: fixed;
+  -webkit-font-smoothing: antialiased;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.04);
+  min-height: 100vh;
+  margin: 0;
+  letter-spacing: 15px;
+}
+
 .totalNum {
   width: 85%;
   margin: 15px;
@@ -75,25 +86,55 @@
 
 .swiper {
   width: 100%;
-  background-color: #f9a7a5;
   text-align: center;
   font-weight: 800;
-  font-size: 25px;
-  margin-top: 25px;
-  margin-left: 30px;
-  .imageSwiperItem {
-    height: 400px;
-    margin: 0 25%;
-    border-radius: 15px;
-    background-color: aquamarine;
+  .poster {
+    width: 100%;
+    margin-top: 20rpx;
+    .card-swiper {
+      height: 400px;
+      .swiper-item {
+        .item {
+          border-radius: 25px;
+          box-shadow: 3px 3px #ccc;
+          background: #fff;
+        }
+        .item,
+        .swiperactive {
+          position: relative;
+          display: block;
+          overflow: hidden;
+          transform: scale(0.8);
+          transition: all 0.5s ease-in 0s;
+          .banner {
+            display: block;
+            width: 45%;
+            margin: 0 auto;
+            padding-bottom: 50px;
+          }
+          .box {
+            position: absolute;
+            top: 45%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+          }
+        }
+        .swiperactive {
+          transform: scale(1);
+        }
+        text {
+          line-height: 70px;
+        }
+      }
+    }
   }
-  .imageSwiperItem text:nth-child(1) {
-    display: block;
-    margin-top: 30px;
-  }
-  .imageSwiperItem image {
-    width: 200px;
-    height: 200px;
-    margin: 10% auto;
+}
+
+.quotesPart {
+  margin-top: 30px;
+  .quotes {
+    font-size: 24px;
+    color: #f9a7a5;
+    letter-spacing: 10px;
   }
 }
