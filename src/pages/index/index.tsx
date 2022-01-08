@@ -88,8 +88,12 @@ const Index: React.FC<IndexProps> = () => {
     <view className="background">
       <Flex align="center" direction="column">
         {/* 第一部分 累计打卡 */}
-        <Flex>
-          <Flex.Item>您累计喝掉8杯</Flex.Item>
+        <Flex className="totalClock">
+          <Flex.Item>
+            <text>您累计喝掉</text>
+            <text>8</text>
+            <text>杯</text>
+          </Flex.Item>
         </Flex>
 
         {/* 第二部分 年 月 周 统计 */}
@@ -165,7 +169,7 @@ const Index: React.FC<IndexProps> = () => {
 
         {/* 第五部分 名言警句 */}
         <Flex direction="column" align="center" className="quotesPart">
-          <Flex.Item>😀😘😜</Flex.Item>
+          <Flex.Item>⭐🧡✨</Flex.Item>
           <Flex.Item className="quotes">努力一分钟，老公会不同。</Flex.Item>
         </Flex>
       </Flex>
