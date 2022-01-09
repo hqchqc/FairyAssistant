@@ -1,0 +1,45 @@
+.swiper {
+  width: 100%;
+  font-weight: 800;
+  text-align: center;
+  .poster {
+    width: 100%;
+    margin-top: 20rpx;
+    .card-swiper {
+      height: 400px;
+      .swiper-item {
+        .item {
+          background: #fff;
+          border-radius: 25px;
+          box-shadow: 3px 3px #ccc;
+        }
+        .item,
+        .swiperactive {
+          position: relative;
+          display: block;
+          overflow: hidden;
+          transform: scale(0.8);
+          transition: all 0.5s ease-in 0s;
+          .banner {
+            display: block;
+            width: 45%;
+            margin: 0 auto;
+            padding-bottom: 50px;
+          }
+          .box {
+            position: absolute;
+            top: 45%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+          }
+        }
+        .swiperactive {
+          transform: scale(1);
+        }
+        text {
+          line-height: 70px;
+        }
+      }
+    }
+  }
+}
