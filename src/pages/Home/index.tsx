@@ -10,7 +10,7 @@ interface IndexProps {}
 
 const Index: React.FC<IndexProps> = () => {
   return (
-    <view className="background">
+    <view>
       <Flex align="center" direction="column">
         {/* 第一部分 累计打卡 */}
         <CumulativeClock />
