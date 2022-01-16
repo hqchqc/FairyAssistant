@@ -26,7 +26,11 @@ const StatisticalWeek: React.FC<StatisticalWeekProps> = () => {
     },
   ];
 
-  const NAVIGATEPATH = '/pages/WeekDetail/index';
+  const PATHMAP = {
+    YEAR: '/pages/YearDetail/index',
+    MONTH: '/pages/MonthDetail/index',
+    WEEK: '/pages/WeekDetail/index',
+  };
 
   return (
     <Flex
@@ -42,9 +46,17 @@ const StatisticalWeek: React.FC<StatisticalWeekProps> = () => {
             span={8}
             key={item.id}
             onClick={e => {
+              index === 0 &&
+                Taro.navigateTo({
+                  url: PATHMAP['YEAR'],
+                });
               index === 1 &&
                 Taro.navigateTo({
-                  url: NAVIGATEPATH,
+                  url: PATHMAP['MONTH'],
+                });
+              index === 2 &&
+                Taro.navigateTo({
+                  url: PATHMAP['WEEK'],
                 });
             }}
           >
