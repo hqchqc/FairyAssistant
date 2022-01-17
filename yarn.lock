@@ -1191,31 +1191,31 @@
   resolved "https://registry.npmjs.org/@stencil/core/-/core-2.9.0.tgz#cbac84b996475b8fc983931539ed1261174e2df3"
   integrity sha512-kY3xYolZoJO1MKslL0NQccHy72R3TIl1prHgfmIrEoGcnMgc6uiskdWaGMuI5/sCGz9T+QuTVz76B1H2ySyBZg==
 
-"@taroify/core@^0.0.20-alpha.3":
-  version "0.0.20-alpha.3"
-  resolved "https://registry.npmjs.org/@taroify/core/-/core-0.0.20-alpha.3.tgz#fd165ae833f31ceb186ce9825d372bef9de82827"
-  integrity sha512-1gjKeje0+ibIpXZe7//E8fHPv/mo3HcJcsIRLPLUaEbiHkVlMEPiFEpVKD/qyacORsL3YL8JCH5LnT0l/e6mbg==
+"@taroify/core@^0.0.24-alpha.1":
+  version "0.0.24-alpha.1"
+  resolved "https://registry.npmjs.org/@taroify/core/-/core-0.0.24-alpha.1.tgz#f3c6b4a528935bfd1d16cc36e6942a1ff9d8c8b3"
+  integrity sha512-v6WHi94twBtEq4R+jSfDk3/WyDr8ngh7lwmJIjDqkrS++KzltKoR8MG4HANIHC0NThdfLueonB7FyA70TunwTA==
   dependencies:
-    "@taroify/hooks" "^0.0.20-alpha.3"
-    "@taroify/icons" "^0.0.20-alpha.3"
+    "@taroify/hooks" "^0.0.24-alpha.1"
+    "@taroify/icons" "^0.0.24-alpha.1"
     classnames "^2.2.6"
     lodash "^4.17.21"
     raf "^3.4.1"
     react-is "^17.0.2"
     react-transition-group "^4.4.1"
 
-"@taroify/hooks@^0.0.20-alpha.3":
-  version "0.0.20-alpha.3"
-  resolved "https://registry.npmjs.org/@taroify/hooks/-/hooks-0.0.20-alpha.3.tgz#4681b5edc2624dbda05401cfa2d6dd1e4df48cac"
-  integrity sha512-G2CzbhBD+1am9mEwyobWMwoH+p34819PByjwDf2kB8Or5CjCENCiddz4mB+zQCMudm49acsrATP4w/cxJdDHbw==
+"@taroify/hooks@^0.0.24-alpha.1":
+  version "0.0.24-alpha.1"
+  resolved "https://registry.npmjs.org/@taroify/hooks/-/hooks-0.0.24-alpha.1.tgz#8cc1e30fef9fb0911e1b1601a9bc6a87db739342"
+  integrity sha512-lcjMR10ZMMjY+tBF8epRjbGdz5jDY+qs8D8n4EUNEJ2J/3V83u/65iK1wq+FktUk+85UPupLrcsBSFbqd4RDIg==
   dependencies:
     lodash "^4.17.21"
     react "^17.0.2"
 
-"@taroify/icons@^0.0.20-alpha.3":
-  version "0.0.20-alpha.3"
-  resolved "https://registry.npmjs.org/@taroify/icons/-/icons-0.0.20-alpha.3.tgz#f4cff403c6568fdef62cfe53bd069e8761186120"
-  integrity sha512-Nl009BUFJmtfY3j0yRJJcuEjANjOyZAMYcdnvhirEKVEjMCqjz5eFKAJnZlz+Y3PaajzhO6YQBfoD1gal+DQYw==
+"@taroify/icons@^0.0.24-alpha.1":
+  version "0.0.24-alpha.1"
+  resolved "https://registry.npmjs.org/@taroify/icons/-/icons-0.0.24-alpha.1.tgz#224a20013605e6bd20450d2d18bd7144385e849d"
+  integrity sha512-DbFzXgDM4GiLECc93VynQecxYf6hGY3weo2K4L4eR57nGSVZB9Y5Crrzw6USOZiPPL8jhTH8MdBYCbv804KcBA==
   dependencies:
     classnames "^2.2.6"
 

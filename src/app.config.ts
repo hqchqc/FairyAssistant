@@ -4,6 +4,7 @@ export default {
     'pages/YearDetail/index',
     'pages/MonthDetail/index',
     'pages/WeekDetail/index',
+    'pages/Punch/index',
   ],
   window: {
     backgroundTextStyle: 'light',

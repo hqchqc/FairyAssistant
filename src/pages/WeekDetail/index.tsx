@@ -4,10 +4,13 @@ import weepPic from '@assets/Illustration/weep.svg';
 import './index.less';
 import CatchPhrase from '../Home/components/CatchPhrase/CatchPhrase';
 import dayjs from 'dayjs';
+import Taro from '@tarojs/taro';
 
 interface WeekDetailProps {}
 
 const WeekDetail: React.FC<WeekDetailProps> = () => {
+  const PATH = '/pages/Punch/index';
+
   return (
     <view>
       <Flex direction="column" align="center" className="weekendCrad">
@@ -29,6 +32,11 @@ const WeekDetail: React.FC<WeekDetailProps> = () => {
             height: '40px',
             marginBottom: '50px',
           }}
+          onClick={() =>
+            Taro.navigateTo({
+              url: PATH,
+            })
+          }
         >
           马上打卡
         </Button>
