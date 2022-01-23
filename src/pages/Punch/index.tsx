@@ -1,7 +1,8 @@
-import { Cell, Form } from '@taroify/core';
-import { BaseEventOrig, Input } from '@tarojs/components';
+import { Button, Form, Radio } from '@taroify/core';
+import { BaseEventOrig } from '@tarojs/components/types/common';
 import { FormProps } from '@tarojs/components/types/Form';
 import './index.less';
+import { View } from '@tarojs/components';
 
 interface PunchProps {}
 
@@ -10,27 +11,27 @@ const Punch: React.FC<PunchProps> = () => {
     console.log(JSON.stringify(event.detail.value));
   };
   return (
-    <Form onSubmit={onSubmit}>
-      <Cell.Group inset>
-        <Form.Item
-          name="username"
-          rules={[{ required: true, message: '请填写用户名' }]}
-        >
-          <Form.Label>用户名</Form.Label>
-          <Form.Control>
-            <Input placeholder="用户名" />
-          </Form.Control>
-        </Form.Item>
-        <Form.Item
-          name="password"
-          rules={[{ required: true, message: '请填写密码' }]}
-        >
-          <Form.Label>密码</Form.Label>
-          <Form.Control>
-            <Input password placeholder="密码" />
-          </Form.Control>
-        </Form.Item>
-      </Cell.Group>
+    <Form
+      onSubmit={onSubmit}
+      defaultValues={{
+        type: 'A',
+      }}
+    >
+      <Form.Item name="type">
+        <Form.Label>种类</Form.Label>
+        <Form.Control>
+          <Radio.Group direction="horizontal">
+            <Radio name="A">A</Radio>
+            <Radio name="C">C</Radio>
+          </Radio.Group>
+        </Form.Control>
+      </Form.Item>
+
+      <View style={{ margin: '16px' }}>
+        <Button shape="round" block color="primary" formType="submit">
+          提交
+        </Button>
+      </View>
     </Form>
   );
 };

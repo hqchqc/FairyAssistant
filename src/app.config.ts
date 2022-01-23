@@ -6,6 +6,18 @@ export default {
     'pages/WeekDetail/index',
     'pages/Punch/index',
   ],
+  tabBar: {
+    list: [
+      {
+        pagePath: 'pages/Home/index',
+        text: '首页',
+      },
+      {
+        pagePath: 'pages/Punch/index',
+        text: '打卡',
+      },
+    ],
+  },
   window: {
     backgroundTextStyle: 'light',
     navigationBarBackgroundColor: '#fff',
