@@ -7,6 +7,7 @@ export default {
     'pages/Punch/index',
   ],
   tabBar: {
+    custom: true,
     list: [
       {
         pagePath: 'pages/Home/index',
@@ -24,4 +25,5 @@ export default {
     navigationBarTitleText: 'WeChat',
     navigationBarTextStyle: 'black',
   },
+  debug: true,
 };
