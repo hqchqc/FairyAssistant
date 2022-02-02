@@ -1191,31 +1191,32 @@
   resolved "https://registry.npmjs.org/@stencil/core/-/core-2.9.0.tgz#cbac84b996475b8fc983931539ed1261174e2df3"
   integrity sha512-kY3xYolZoJO1MKslL0NQccHy72R3TIl1prHgfmIrEoGcnMgc6uiskdWaGMuI5/sCGz9T+QuTVz76B1H2ySyBZg==
 
-"@taroify/core@^0.0.24-alpha.1":
-  version "0.0.24-alpha.1"
-  resolved "https://registry.npmjs.org/@taroify/core/-/core-0.0.24-alpha.1.tgz#f3c6b4a528935bfd1d16cc36e6942a1ff9d8c8b3"
-  integrity sha512-v6WHi94twBtEq4R+jSfDk3/WyDr8ngh7lwmJIjDqkrS++KzltKoR8MG4HANIHC0NThdfLueonB7FyA70TunwTA==
+"@taroify/core@^0.0.26-alpha.5":
+  version "0.0.26-alpha.5"
+  resolved "https://registry.npmjs.org/@taroify/core/-/core-0.0.26-alpha.5.tgz#1d8624c48e981d92ff57ba436e8218cb77798145"
+  integrity sha512-sNrVfOLlEwmh9NJO/bvfnxsFf1v0gux+N7ec5OuDujKQoclDYkpqugfch5GeQXLJ6GTiuWrMeATluc5C2E0g3w==
   dependencies:
-    "@taroify/hooks" "^0.0.24-alpha.1"
-    "@taroify/icons" "^0.0.24-alpha.1"
+    "@taroify/hooks" "^0.0.26-alpha.5"
+    "@taroify/icons" "^0.0.26-alpha.5"
     classnames "^2.2.6"
     lodash "^4.17.21"
     raf "^3.4.1"
     react-is "^17.0.2"
     react-transition-group "^4.4.1"
 
-"@taroify/hooks@^0.0.24-alpha.1":
-  version "0.0.24-alpha.1"
-  resolved "https://registry.npmjs.org/@taroify/hooks/-/hooks-0.0.24-alpha.1.tgz#8cc1e30fef9fb0911e1b1601a9bc6a87db739342"
-  integrity sha512-lcjMR10ZMMjY+tBF8epRjbGdz5jDY+qs8D8n4EUNEJ2J/3V83u/65iK1wq+FktUk+85UPupLrcsBSFbqd4RDIg==
+"@taroify/hooks@^0.0.26-alpha.5":
+  version "0.0.26-alpha.5"
+  resolved "https://registry.npmjs.org/@taroify/hooks/-/hooks-0.0.26-alpha.5.tgz#e4a0d5c3ca1fc6d5e9995dbaa16d5f9470f17fe0"
+  integrity sha512-HZx7JNl2Q7Ze2W7t1IqLI7SOiKu5tGdQBepkukKVaRidYWEncxxrNYZBqT/aL8Daxd19ud2IliGQWLxHP+XmRw==
   dependencies:
+    "@vant/area-data" "^1.2.1"
     lodash "^4.17.21"
     react "^17.0.2"
 
-"@taroify/icons@^0.0.24-alpha.1":
-  version "0.0.24-alpha.1"
-  resolved "https://registry.npmjs.org/@taroify/icons/-/icons-0.0.24-alpha.1.tgz#224a20013605e6bd20450d2d18bd7144385e849d"
-  integrity sha512-DbFzXgDM4GiLECc93VynQecxYf6hGY3weo2K4L4eR57nGSVZB9Y5Crrzw6USOZiPPL8jhTH8MdBYCbv804KcBA==
+"@taroify/icons@^0.0.26-alpha.5":
+  version "0.0.26-alpha.5"
+  resolved "https://registry.npmjs.org/@taroify/icons/-/icons-0.0.26-alpha.5.tgz#fae219c93e8da7acec15fb89f5177ebbe29c99a6"
+  integrity sha512-fFAoxpnFyI5TYM2moamikEdWGvUblxpakTWmyOuPMJ4x5EjewbS8/+HzLJ/FTeLzusqco7cvBraRSsYJfz9/Yw==
   dependencies:
     classnames "^2.2.6"
 
@@ -1687,6 +1688,11 @@
   dependencies:
     "@typescript-eslint/types" "4.33.0"
     eslint-visitor-keys "^2.0.0"
+
+"@vant/area-data@^1.2.1":
+  version "1.2.2"
+  resolved "https://registry.npmjs.org/@vant/area-data/-/area-data-1.2.2.tgz#1b0559ee93661663d10d3766bcde15ab35ff3fcd"
+  integrity sha512-efv7Yl/OTHjyy0irhJJPtgZb5mJZmroEtVOa8vkGRNTLY93+NgEcVuIBaC35hYCMsTrPHDQRvQGnI9Hyhtto0Q==
 
 "@vue/babel-helper-vue-jsx-merge-props@^1.2.1":
   version "1.2.1"

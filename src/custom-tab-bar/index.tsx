@@ -1,12 +1,13 @@
 import { Tabbar } from '@taroify/core';
 import { HomeOutlined, SettingOutlined } from '@taroify/icons';
 import Taro from '@tarojs/taro';
+import './index.less';
 
 interface BasicTabbarProps {}
 
 const BasicTabbar: React.FC<BasicTabbarProps> = () => {
   const onChange = (tabbar: string) => {
-    console.log(tabbar);
+    console.log(tabbar, 111);
     Taro.switchTab({
       url: `/pages/${tabbar}/index`,
     });

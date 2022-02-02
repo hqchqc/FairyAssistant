@@ -19,6 +19,7 @@ export default {
       },
     ],
   },
+  usingComponents: {},
   window: {
     backgroundTextStyle: 'light',
     navigationBarBackgroundColor: '#fff',
