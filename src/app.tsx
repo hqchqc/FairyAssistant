@@ -1,6 +1,8 @@
 import Taro from '@tarojs/taro';
 import { Component } from 'react';
+import { Provider } from 'mobx-react';
 import sr from 'sr-sdk-wxapp';
+import Store from './store';
 
 import './app.less';
 
@@ -49,6 +51,13 @@ sr.init({
   installFrom: 'Taro@v3',
 });
 
+/**
+ * mobx 的引入
+ */
+const store = {
+  Store,
+};
+
 class App extends Component {
   componentDidMount() {
     if (process.env.TARO_ENV === 'weapp') {
@@ -66,7 +75,7 @@ class App extends Component {
 
   // this.props.children 是将要会渲染的页面
   render() {
-    return this.props.children;
+    return <Provider store={store}>{this.props.children}</Provider>;
   }
 }
 

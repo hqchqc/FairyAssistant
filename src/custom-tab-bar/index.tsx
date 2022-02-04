@@ -2,18 +2,30 @@ import { Tabbar } from '@taroify/core';
 import { HomeOutlined, SettingOutlined } from '@taroify/icons';
 import Taro from '@tarojs/taro';
 import './index.less';
+import { observer, inject } from 'mobx-react';
 
-interface BasicTabbarProps {}
+interface BasicTabbarProps {
+  store: {
+    Store: { selectedTab: (tabbar: string) => void; tabbarIndex: string };
+  };
+}
 
-const BasicTabbar: React.FC<BasicTabbarProps> = () => {
+const BasicTabbar: React.FC<BasicTabbarProps> = props => {
+  const {
+    store: {
+      Store: { selectedTab, tabbarIndex },
+    },
+  } = props;
+
   const onChange = (tabbar: string) => {
-    console.log(tabbar, 111);
+    selectedTab(tabbar);
     Taro.switchTab({
       url: `/pages/${tabbar}/index`,
     });
   };
+
   return (
-    <Tabbar defaultValue="Home" fixed bordered onChange={onChange}>
+    <Tabbar value={tabbarIndex} onChange={onChange}>
       <Tabbar.TabItem value={'Home'} icon={<HomeOutlined />}>
         首页
       </Tabbar.TabItem>
@@ -24,4 +36,4 @@ const BasicTabbar: React.FC<BasicTabbarProps> = () => {
   );
 };
 
-export default BasicTabbar;
+export default inject('store')(observer(BasicTabbar));
