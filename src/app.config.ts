@@ -5,6 +5,7 @@ export default {
     'pages/MonthDetail/index',
     'pages/WeekDetail/index',
     'pages/Punch/index',
+    'pages/MyInfo/index',
   ],
   tabBar: {
     custom: true,
@@ -14,7 +15,7 @@ export default {
         text: '首页',
       },
       {
-        pagePath: 'pages/Punch/index',
+        pagePath: 'pages/MyInfo/index',
         text: '打卡',
       },
     ],
@@ -26,5 +27,4 @@ export default {
     navigationBarTitleText: 'WeChat',
     navigationBarTextStyle: 'black',
   },
-  debug: true,
 };

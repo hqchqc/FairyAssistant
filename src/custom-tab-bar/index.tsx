@@ -1,5 +1,5 @@
 import { Tabbar } from '@taroify/core';
-import { HomeOutlined, SettingOutlined } from '@taroify/icons';
+import { WapHomeOutlined, ManagerOutlined } from '@taroify/icons';
 import Taro from '@tarojs/taro';
 import './index.less';
 import { observer, inject } from 'mobx-react';
@@ -26,10 +26,10 @@ const BasicTabbar: React.FC<BasicTabbarProps> = props => {
 
   return (
     <Tabbar value={tabbarIndex} onChange={onChange}>
-      <Tabbar.TabItem value={'Home'} icon={<HomeOutlined />}>
+      <Tabbar.TabItem value={'Home'} icon={<WapHomeOutlined />}>
         首页
       </Tabbar.TabItem>
-      <Tabbar.TabItem value={'Punch'} icon={<SettingOutlined />}>
+      <Tabbar.TabItem value={'MyInfo'} icon={<ManagerOutlined />}>
         我的
       </Tabbar.TabItem>
     </Tabbar>

@@ -1,10 +1,10 @@
 import { Flex, Button } from '@taroify/core';
 import { Image } from '@tarojs/components';
 import weepPic from '@assets/Illustration/weep.svg';
-import './index.less';
 import CatchPhrase from '../Home/components/CatchPhrase/CatchPhrase';
 import dayjs from 'dayjs';
 import Taro from '@tarojs/taro';
+import './index.less';
 
 interface WeekDetailProps {}
 
