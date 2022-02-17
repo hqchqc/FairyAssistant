@@ -1,10 +1,10 @@
-import { Image, Toast } from '@taroify/core';
+import Taro from '@tarojs/taro';
+import { Image } from '@tarojs/components';
+import { useState } from 'react';
 import avatarFrameImg from '@assets/img/avatarFrame.svg';
 import avatarImg from '@assets/img/avatar.svg';
-
+import { Toast } from '@taroify/core';
 import './index.less';
-import Taro from '@tarojs/taro';
-import { useState } from 'react';
 
 interface MyInfoProps {}
 
@@ -32,11 +32,7 @@ const MyInfo: React.FC<MyInfoProps> = () => {
       <view className="myInfoBg">
         <view className="myInfoBox">
           <Image src={avatarFrameImg} className="avatarFrame" />
-          <Image
-            src={avatarUrl || avatarImg}
-            shape="circle"
-            className="avatar"
-          />
+          <Image src={avatarUrl || avatarImg} className="avatar" />
           <text className="loginText" onClick={() => handleLogin()}>
             {nickName || '点击登录'}
           </text>
