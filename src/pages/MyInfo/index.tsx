@@ -4,11 +4,30 @@ import { useState } from 'react';
 import avatarFrameImg from '@assets/img/avatarFrame.svg';
 import avatarImg from '@assets/img/avatar.svg';
 import { Button, Toast } from '@taroify/core';
+import { observer, inject } from 'mobx-react';
+import { punchInfo } from '../../store/index';
 import './index.less';
 
-interface MyInfoProps {}
+interface MyInfoProps {
+  store: {
+    Store: {
+      savePunchInfo: (punchInfo: punchInfo[]) => void;
+    };
+  };
+}
 
-const MyInfo: React.FC<MyInfoProps> = () => {
+type punchResult = {
+  result?: {
+    data?: punchInfo[];
+  };
+};
+
+const MyInfo: React.FC<MyInfoProps> = props => {
+  const {
+    store: {
+      Store: { savePunchInfo },
+    },
+  } = props;
   const [avatarUrl, setAvatarUrl] = useState('');
   const [nickName, setNickName] = useState('');
   const [isHandleLogin, setIsHandleLogin] = useState(true);
@@ -16,14 +35,20 @@ const MyInfo: React.FC<MyInfoProps> = () => {
   const handleLogin = () => {
     Taro.getUserProfile({
       desc: '用于登录小程序',
-      success: userInfo => {
+      success: async userInfo => {
         const { avatarUrl, nickName } = userInfo.userInfo;
         setNickName(nickName);
         setAvatarUrl(avatarUrl);
         setIsHandleLogin(false);
-        Taro.cloud.callFunction({
+        const punchInfo = (await Taro.cloud.callFunction({
           name: 'punchInfo',
-        });
+        })) as punchResult;
+
+        console.log(punchInfo);
+
+        if (punchInfo?.result?.data && punchInfo?.result?.data?.length !== 0) {
+          savePunchInfo(punchInfo?.result?.data);
+        }
         Toast.success('登录成功！');
       },
       fail: () => {
@@ -37,6 +62,7 @@ const MyInfo: React.FC<MyInfoProps> = () => {
     setIsHandleLogin(true);
     setNickName('');
     setAvatarUrl('');
+    savePunchInfo([]);
   };
 
   return (
@@ -52,14 +78,16 @@ const MyInfo: React.FC<MyInfoProps> = () => {
             {nickName || '点击登录'}
           </text>
         </view>
+        {!isHandleLogin && (
+          <Button block onClick={() => handleLogOut()} className="myInfoLogOut">
+            退出登录
+          </Button>
+        )}
       </view>
 
-      <Button color="primary" block onClick={() => handleLogOut()}>
-        退出登录
-      </Button>
       <Toast id="toast" />
     </>
   );
 };
 
-export default MyInfo;
+export default inject('store')(observer(MyInfo));

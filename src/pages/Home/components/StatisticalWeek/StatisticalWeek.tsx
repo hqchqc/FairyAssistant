@@ -1,27 +1,32 @@
 import { Flex } from '@taroify/core';
 import Taro from '@tarojs/taro';
+import { punchInfo } from 'src/store';
 import './StatisticalWeek.less';
 
-interface StatisticalWeekProps {}
+interface StatisticalWeekProps {
+  punchInfo: punchInfo;
+}
 
-const StatisticalWeek: React.FC<StatisticalWeekProps> = () => {
+const StatisticalWeek: React.FC<StatisticalWeekProps> = props => {
+  const { punchInfo } = props;
+
   const totalNum = [
     {
       id: 'year',
       text: '今年已打',
-      num: 1,
+      num: punchInfo?.year?.times,
       unit: '次',
     },
     {
       id: 'month',
       text: '本月已打',
-      num: 1,
+      num: punchInfo?.month?.times,
       unit: '次',
     },
     {
       id: 'week',
       text: '本周已打',
-      num: 1,
+      num: punchInfo?.week?.times,
       unit: '次',
     },
   ];
@@ -45,7 +50,7 @@ const StatisticalWeek: React.FC<StatisticalWeekProps> = () => {
             className="totalDetail"
             span={8}
             key={item.id}
-            onClick={e => {
+            onClick={() => {
               index === 0 &&
                 Taro.navigateTo({
                   url: PATHMAP['YEAR'],
@@ -61,7 +66,7 @@ const StatisticalWeek: React.FC<StatisticalWeekProps> = () => {
             }}
           >
             <text>{item.text}</text>
-            <text>{item.num}</text>
+            <text>{item.num?.toString() || '-'}</text>
             <text>{item.unit}</text>
           </Flex.Item>
         );

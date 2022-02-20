@@ -1,29 +1,43 @@
 import { Calendar, Flex, Tabs } from '@taroify/core';
 import { Image } from '@tarojs/components';
 import fightPic from '@assets/Illustration/fight.svg';
+import { punchInfo } from 'src/store';
+import { observer, inject } from 'mobx-react';
 import dayjs from 'dayjs';
 import './index.less';
 
-interface MonthDetailProps {}
+interface MonthDetailProps {
+  store: {
+    Store: {
+      punchInfo: punchInfo[];
+    };
+  };
+}
 
-const MonthDetail: React.FC<MonthDetailProps> = () => {
+const MonthDetail: React.FC<MonthDetailProps> = props => {
+  const {
+    store: {
+      Store: { punchInfo },
+    },
+  } = props;
+
   const totalNums = [
     {
       id: 'year',
       text: '本月累计喝掉',
-      num: 1,
+      num: punchInfo[0]?.month?.times,
       unit: '杯',
     },
     {
       id: 'month',
       text: '本月坚持连续打卡',
-      num: 11,
+      num: punchInfo[0]?.month?.seriesTimes,
       unit: '天',
     },
     {
       id: 'week',
       text: '本月最长连续',
-      num: 19,
+      num: punchInfo[0]?.month?.notSeriesTimes,
       unit: '天没喝奶茶',
     },
   ];
@@ -34,10 +48,11 @@ const MonthDetail: React.FC<MonthDetailProps> = () => {
         <Flex.Item>
           <Flex direction="column" justify="center" className="textItem">
             {totalNums.map(item => {
+              console.log(item);
               return (
                 <Flex.Item className="totalText" key={item.id}>
                   <text>{item.text}</text>
-                  <text>{item.num}</text>
+                  <text>{item.num?.toString() || '-'}</text>
                   <text>{item.unit}</text>
                 </Flex.Item>
               );
@@ -76,4 +91,4 @@ const MonthDetail: React.FC<MonthDetailProps> = () => {
   );
 };
 
-export default MonthDetail;
+export default inject('store')(observer(MonthDetail));
