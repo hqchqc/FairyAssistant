@@ -1,5 +1,5 @@
 {
-    "name": "addRecord",
+    "name": "createPunch",
     "version": "1.0.0",
     "description": "",
     "main": "index.js",
@@ -9,6 +9,7 @@
     "author": "",
     "license": "ISC",
     "dependencies": {
+        "dayjs": "^1.10.7",
         "wx-server-sdk": "~2.5.3"
     }
 }

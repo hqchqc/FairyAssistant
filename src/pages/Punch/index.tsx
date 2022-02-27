@@ -1,14 +1,25 @@
-import { Button, Form, Radio } from '@taroify/core';
+import { Button, Form, Radio, Toast } from '@taroify/core';
 import { BaseEventOrig } from '@tarojs/components/types/common';
 import { FormProps } from '@tarojs/components/types/Form';
 import './index.less';
 import { View } from '@tarojs/components';
+import Taro from '@tarojs/taro';
 
 interface PunchProps {}
 
 const Punch: React.FC<PunchProps> = () => {
   const onSubmit = (event: BaseEventOrig<FormProps.onSubmitEventDetail>) => {
-    console.log(JSON.stringify(event.detail.value));
+    const type = event.detail.value?.type;
+    Taro.cloud.callFunction({
+      name: 'createPunch',
+      data: {
+        type,
+      },
+      success: (res: TaroGeneral.IAnyObject) => {
+        console.log(res, 11);
+      },
+      fail: err => Toast.fail(err.errMsg),
+    });
   };
   return (
     <Form

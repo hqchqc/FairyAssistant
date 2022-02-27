@@ -1,11 +1,11 @@
 export default {
   pages: [
     'pages/Home/index',
-    'pages/YearDetail/index',
     'pages/MonthDetail/index',
+    'pages/YearDetail/index',
     'pages/WeekDetail/index',
-    'pages/Punch/index',
     'pages/MyInfo/index',
+    'pages/Punch/index',
   ],
   tabBar: {
     custom: true,
