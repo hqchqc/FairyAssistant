@@ -12,8 +12,7 @@ exports.main = async (event, context) => {
   const month = dayjs().month() + 1;
   const day = dayjs().date();
   const date = dayjs().format('YYYY-MM-DD');
-  console.log(month, date, day);
-  // 1. 查询改openid的所有记录
+  // 1. 查询该openid的所有记录
   // 2. 如果有记录
   //    查询记录下有没有当前月份
   //    有就更新
@@ -21,9 +20,8 @@ exports.main = async (event, context) => {
   //    新增一条记录
   const data = await db
     .collection('detailPunch')
-    .where({ _openid: OPENID })
+    .where({ _openid: OPENID, month })
     .get();
-  console.log(data);
   if (data.data.length === 0) {
     const detail = {
       [type]: [day],
@@ -37,17 +35,27 @@ exports.main = async (event, context) => {
       },
       success: res => console.log(res, 9991999),
     });
+  } else {
+    data.data.map(async item => {
+      if (item.month === month) {
+        await db
+          .collection('detailPunch')
+          .doc(item._id)
+          .update({
+            data: {
+              detail: item.detail.type
+                ? item.detail.type.push(day)
+                : {
+                    [type]: [day],
+                  },
+            },
+            success: function (res) {
+              console.log(res.data);
+            },
+          });
+      }
+    });
   }
-  // else {
-  // data.data.map(item => {
-  //   if (item.month === month) {
-  //     (await db.collection('detailPunch').where
-  //       item.data[type])
-  //       ? item.data[type].push(day)
-  //       : (item.data[type] = [day]);
-  //   }
-  // });
-  // }
 
   return data;
 };
