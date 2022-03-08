@@ -1,4 +1,4 @@
-import { Flex } from '@taroify/core';
+import { Flex, Toast } from '@taroify/core';
 import CatchPhrase from './components/CatchPhrase/CatchPhrase';
 import CumulativeClock from './components/CumulativeClock/CumulativeClock';
 import Medal from './components/Medal/Medal';
@@ -8,21 +8,51 @@ import { observer, inject } from 'mobx-react';
 
 import './index.less';
 import { punchInfo } from 'src/store';
+import { useEffect } from 'react';
+import Taro from '@tarojs/taro';
 
 interface IndexProps {
   store: {
     Store: {
       punchInfo: punchInfo[];
+      tabbarIndex: string;
+      savePunchInfo: (punchInfo: punchInfo[]) => void;
+      selectedTab: (tabbar: string) => void;
     };
   };
 }
 
+type punchResult = {
+  result?: {
+    data?: punchInfo[];
+  };
+};
+
 const Index: React.FC<IndexProps> = props => {
   const {
     store: {
-      Store: { punchInfo },
+      Store: { punchInfo, tabbarIndex, savePunchInfo, selectedTab },
     },
   } = props;
+
+  useEffect(() => {
+    Taro.checkSession({
+      success: async () => {
+        const punchInfo = (await Taro.cloud.callFunction({
+          name: 'punchInfo',
+        })) as punchResult;
+
+        if (punchInfo?.result?.data && punchInfo?.result?.data?.length !== 0) {
+          savePunchInfo(punchInfo?.result?.data);
+        }
+      },
+      fail: function (err) {
+        Toast.fail('请登录！');
+        selectedTab('MyInfo');
+        Taro.switchTab({ url: '/pages/MyInfo/index' });
+      },
+    });
+  }, [tabbarIndex]);
 
   return (
     <view>

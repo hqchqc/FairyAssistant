@@ -7,11 +7,11 @@ const db = cloud.database();
 // 云函数入口函数
 exports.main = async (event, context) => {
   const { OPENID, APPID } = cloud.getWXContext();
-  const { month } = event;
+  const { month, day } = event;
 
   const data = await db
     .collection('detailPunch')
-    .where({ _openid: OPENID, month })
+    .where({ _openid: OPENID, month, day })
     .get();
 
   return data;

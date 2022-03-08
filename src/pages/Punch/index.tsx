@@ -15,8 +15,8 @@ const Punch: React.FC<PunchProps> = () => {
       data: {
         type,
       },
-      success: (res: TaroGeneral.IAnyObject) => {
-        console.log(res, 11);
+      success: () => {
+        Toast.success('打卡成功！');
       },
       fail: err => Toast.fail(err.errMsg),
     });

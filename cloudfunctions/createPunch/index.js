@@ -12,50 +12,46 @@ exports.main = async (event, context) => {
   const month = dayjs().month() + 1;
   const day = dayjs().date();
   const date = dayjs().format('YYYY-MM-DD');
-  // 1. 查询该openid的所有记录
-  // 2. 如果有记录
-  //    查询记录下有没有当前月份
-  //    有就更新
-  // 3. 如果没有记录
-  //    新增一条记录
   const data = await db
     .collection('detailPunch')
-    .where({ _openid: OPENID, month })
+    .where({ _openid: OPENID, month, day })
     .get();
+  const result = {};
+
   if (data.data.length === 0) {
-    const detail = {
-      [type]: [day],
-    };
-    db.collection('detailPunch').add({
+    await db.collection('detailPunch').add({
       data: {
         _openid: OPENID,
         month,
-        detail,
+        day,
+        type,
         date,
       },
-      success: res => console.log(res, 9991999),
+      success: res => {
+        return (result = {
+          state: 'SUCCESS',
+        });
+      },
     });
   } else {
     data.data.map(async item => {
-      if (item.month === month) {
+      if (item.month === month && item.day === day) {
         await db
           .collection('detailPunch')
           .doc(item._id)
           .update({
             data: {
-              detail: item.detail.type
-                ? item.detail.type.push(day)
-                : {
-                    [type]: [day],
-                  },
+              type,
             },
             success: function (res) {
-              console.log(res.data);
+              return (result = {
+                state: 'SUCCESS',
+              });
             },
           });
       }
     });
   }
 
-  return data;
+  return result;
 };
