@@ -33,7 +33,7 @@ const MonthDetail: React.FC<MonthDetailProps> = props => {
         month,
       },
       success: (res: TaroGeneral.IAnyObject) => {
-        res.result && setInitUseDate(res.result?.data[0]?.detail);
+        res.result && setInitUseDate(res.result?.data[0]);
       },
       fail: err => Toast.fail(err.errMsg),
     });
@@ -47,9 +47,9 @@ const MonthDetail: React.FC<MonthDetailProps> = props => {
   const totalNums = [
     {
       id: 'year',
-      text: '本月累计喝掉',
+      text: '本月累计打卡',
       num: punchInfo.length ? punchInfo[0]?.month?.times : '-',
-      unit: '杯',
+      unit: '次',
     },
     {
       id: 'month',
@@ -61,7 +61,7 @@ const MonthDetail: React.FC<MonthDetailProps> = props => {
       id: 'week',
       text: '本月最长连续',
       num: punchInfo.length ? punchInfo[0]?.month?.notSeriesTimes : '-',
-      unit: '天没喝奶茶',
+      unit: '天没打卡',
     },
   ];
 
@@ -71,16 +71,19 @@ const MonthDetail: React.FC<MonthDetailProps> = props => {
     }
 
     const date = day.value.getDate();
+    if (date === initUseDate?.day) {
+      day.bottom = <text className="iconfont icon-jinghuaru"></text>;
+    }
 
-    initUseDate?.A?.map(item => {
-      date === item &&
-        (day.bottom = <text className="iconfont icon-jinghuaru"></text>);
-    });
+    // initUseDate?.A?.map(item => {
+    //   date === item &&
+    //     (day.bottom = <text className="iconfont icon-jinghuaru"></text>);
+    // });
 
-    initUseDate?.C?.map(item => {
-      date === item &&
-        (day.bottom = <text className="iconfont icon-ruye"></text>);
-    });
+    // initUseDate?.C?.map(item => {
+    //   date === item &&
+    //     (day.bottom = <text className="iconfont icon-ruye"></text>);
+    // });
 
     return day;
   };

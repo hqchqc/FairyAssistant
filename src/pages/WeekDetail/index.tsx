@@ -25,7 +25,7 @@ const WeekDetail: React.FC<WeekDetailProps> = () => {
       },
       success: (res: TaroGeneral.IAnyObject) => {
         if (res.result?.data) {
-          setIsPunch(true);
+          setIsPunch(false);
         } else {
           setIsPunch(false);
         }

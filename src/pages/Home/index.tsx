@@ -1,4 +1,4 @@
-import { Flex, Toast } from '@taroify/core';
+import { Flex } from '@taroify/core';
 import CatchPhrase from './components/CatchPhrase/CatchPhrase';
 import CumulativeClock from './components/CumulativeClock/CumulativeClock';
 import Medal from './components/Medal/Medal';
@@ -47,7 +47,7 @@ const Index: React.FC<IndexProps> = props => {
         }
       },
       fail: function (err) {
-        Toast.fail('请登录！');
+        // Toast.fail('请登录！');
         selectedTab('MyInfo');
         Taro.switchTab({ url: '/pages/MyInfo/index' });
       },
