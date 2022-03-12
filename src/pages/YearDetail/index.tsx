@@ -3,12 +3,12 @@ import { Image } from '@tarojs/components';
 import fightPic from '@assets/Illustration/fight_boy.svg';
 import { observer, inject } from 'mobx-react';
 import './index.less';
-import { punchInfo } from 'src/store';
+import { detailTimes } from 'src/store';
 
 interface YearDetailProps {
   store: {
     Store: {
-      punchInfo: punchInfo[];
+      punchInfo: detailTimes;
     };
   };
 }
@@ -23,9 +23,9 @@ const YearDetail: React.FC<YearDetailProps> = props => {
   const totalNums = [
     {
       id: 'year',
-      text: '今年累计喝掉',
-      num: punchInfo[0]?.year?.useTimes,
-      unit: '杯',
+      text: '今年累计打卡',
+      num: punchInfo.yearTimes,
+      unit: '次',
     },
   ];
 
@@ -38,7 +38,7 @@ const YearDetail: React.FC<YearDetailProps> = props => {
               return (
                 <Flex.Item className="totalText" key={item.id}>
                   <text>{item.text}</text>
-                  <text>{item.num?.toString() || '-'}</text>
+                  <text>{item.num || '-'}</text>
                   <text>{item.unit}</text>
                 </Flex.Item>
               );

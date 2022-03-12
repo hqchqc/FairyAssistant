@@ -1,24 +1,18 @@
 import { observable, action } from 'mobx';
 
-export type punchInfo = {
-  month?: {
-    notSeriesTimes: number;
-    seriesTimes: number;
-    times: number;
-  };
-  week?: {
-    times: number;
-  };
-  year?: {
-    times: number;
-    useTimes: number;
-  };
-  totalTimes?: number;
+export type detailTimes = {
+  weekTimes: number;
+  yearTimes: number;
+  monthTimes: number;
 };
-
 class Store {
   @observable tabbarIndex = 'Home';
-  @observable punchInfo: punchInfo[] = [];
+  @observable totalTimes = 0;
+  @observable punchInfo: detailTimes = {
+    weekTimes: 0,
+    yearTimes: 0,
+    monthTimes: 0,
+  };
 
   @action.bound
   selectedTab(tabbar: string) {
@@ -26,7 +20,12 @@ class Store {
   }
 
   @action.bound
-  savePunchInfo(punchInfo: punchInfo[]) {
+  saveTotalTimes(totalTimes: string) {
+    this.totalTimes = Number(totalTimes);
+  }
+
+  @action.bound
+  savePunchInfo(punchInfo: detailTimes) {
     this.punchInfo = punchInfo;
   }
 }

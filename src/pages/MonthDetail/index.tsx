@@ -1,66 +1,65 @@
-import { Calendar, Flex, Tabs, Toast } from '@taroify/core';
+import { Calendar, Flex, Tabs } from '@taroify/core';
 import { Image } from '@tarojs/components';
 import fightPic from '@assets/Illustration/fight.svg';
-import { punchInfo } from 'src/store';
 import { observer, inject } from 'mobx-react';
 import dayjs from 'dayjs';
 import './index.less';
 import { useCallback, useEffect, useState } from 'react';
 import Taro from '@tarojs/taro';
+import { detailTimes } from 'src/store';
 
 interface MonthDetailProps {
   store: {
     Store: {
-      punchInfo: punchInfo[];
+      punchInfo: detailTimes;
     };
   };
 }
 
+type seriesTimes = {
+  seriesTimes: number;
+  notSeriesTimes: number;
+};
+
 const MonthDetail: React.FC<MonthDetailProps> = props => {
-  const {
-    store: {
-      Store: { punchInfo },
-    },
-  } = props;
+  const punchInfo = props?.store?.Store.punchInfo;
 
-  const [value, setValue] = useState(1);
-  const [initUseDate, setInitUseDate] = useState<TaroGeneral.IAnyObject>();
+  const [seriesTimes, setSeriesTimes] = useState<seriesTimes>({
+    seriesTimes: 0,
+    notSeriesTimes: 0,
+  });
 
-  const fetchUseData = useCallback(month => {
+  const fetchSeriesTimes = useCallback(() => {
     return Taro.cloud.callFunction({
-      name: 'punchCalc',
+      name: 'daily_request',
       data: {
-        month,
+        function_name: 'seriesTimes',
       },
-      success: (res: TaroGeneral.IAnyObject) => {
-        res.result && setInitUseDate(res.result?.data[0]);
-      },
-      fail: err => Toast.fail(err.errMsg),
+      success: res => res?.result && setSeriesTimes(res.result as seriesTimes),
     });
   }, []);
 
   useEffect(() => {
-    const month = dayjs().month() + 1;
-    fetchUseData(month);
+    fetchSeriesTimes();
   }, []);
 
   const totalNums = [
     {
       id: 'year',
       text: '本月累计打卡',
-      num: punchInfo.length ? punchInfo[0]?.month?.times : '-',
+      num: punchInfo.monthTimes,
       unit: '次',
     },
     {
       id: 'month',
       text: '本月坚持连续打卡',
-      num: punchInfo.length ? punchInfo[0]?.month?.seriesTimes : '-',
+      num: seriesTimes.seriesTimes,
       unit: '天',
     },
     {
       id: 'week',
       text: '本月最长连续',
-      num: punchInfo.length ? punchInfo[0]?.month?.notSeriesTimes : '-',
+      num: seriesTimes.notSeriesTimes,
       unit: '天没打卡',
     },
   ];
@@ -71,9 +70,9 @@ const MonthDetail: React.FC<MonthDetailProps> = props => {
     }
 
     const date = day.value.getDate();
-    if (date === initUseDate?.day) {
-      day.bottom = <text className="iconfont icon-jinghuaru"></text>;
-    }
+    // if (date === initUseDate?.day) {
+    //   day.bottom = <text className="iconfont icon-jinghuaru"></text>;
+    // }
 
     // initUseDate?.A?.map(item => {
     //   date === item &&
@@ -86,13 +85,6 @@ const MonthDetail: React.FC<MonthDetailProps> = props => {
     // });
 
     return day;
-  };
-
-  const handleTab = (key: number, info: { title: string }) => {
-    const lastIndex = info.title?.lastIndexOf('.');
-    const currentMonth = Number(info.title?.substring(lastIndex + 1));
-    setValue(key);
-    fetchUseData(currentMonth);
   };
 
   return (
@@ -116,28 +108,12 @@ const MonthDetail: React.FC<MonthDetailProps> = props => {
         </Flex.Item>
       </Flex>
 
-      <Tabs className="weekendCalen" value={value} onChange={handleTab}>
-        <Tabs.TabPane title={dayjs().add(-1, 'M').format('YYYY.MM')}>
-          <Calendar
-            title={false}
-            min={dayjs().add(-1, 'M').toDate()}
-            max={dayjs().add(-1, 'M').toDate()}
-            formatter={dayFormatter}
-          />
-        </Tabs.TabPane>
+      <Tabs className="weekendCalen">
         <Tabs.TabPane title={dayjs().format('YYYY.MM')}>
           <Calendar
             title={false}
             min={dayjs().toDate()}
             max={dayjs().toDate()}
-            formatter={dayFormatter}
-          />
-        </Tabs.TabPane>
-        <Tabs.TabPane title={dayjs().add(1, 'M').format('YYYY.MM')}>
-          <Calendar
-            title={false}
-            min={dayjs().add(1, 'M').toDate()}
-            max={dayjs().add(1, 'M').toDate()}
             formatter={dayFormatter}
           />
         </Tabs.TabPane>

@@ -1,32 +1,39 @@
 import { Flex } from '@taroify/core';
 import Taro from '@tarojs/taro';
-import { punchInfo } from 'src/store';
+import { detailTimes } from 'src/store';
+import { observer, inject } from 'mobx-react';
 import './StatisticalWeek.less';
 
 interface StatisticalWeekProps {
-  punchInfo: punchInfo;
+  store?: {
+    Store: { punchInfo: detailTimes };
+  };
 }
 
 const StatisticalWeek: React.FC<StatisticalWeekProps> = props => {
-  const { punchInfo } = props;
+  const punchInfo = props?.store?.Store.punchInfo || {
+    yearTimes: 0,
+    monthTimes: 0,
+    weekTimes: 0,
+  };
 
   const totalNum = [
     {
       id: 'year',
       text: '今年已打',
-      num: punchInfo?.year?.times,
+      num: punchInfo.yearTimes,
       unit: '次',
     },
     {
       id: 'month',
       text: '本月已打',
-      num: punchInfo?.month?.times,
+      num: punchInfo.monthTimes,
       unit: '次',
     },
     {
       id: 'week',
       text: '本周已打',
-      num: punchInfo?.week?.times,
+      num: punchInfo.weekTimes,
       unit: '次',
     },
   ];
@@ -66,7 +73,7 @@ const StatisticalWeek: React.FC<StatisticalWeekProps> = props => {
             }}
           >
             <text>{item.text}</text>
-            <text>{item.num?.toString() || '-'}</text>
+            <text>{item.num || '-'}</text>
             <text>{item.unit}</text>
           </Flex.Item>
         );
@@ -75,4 +82,4 @@ const StatisticalWeek: React.FC<StatisticalWeekProps> = props => {
   );
 };
 
-export default StatisticalWeek;
+export default inject('store')(observer(StatisticalWeek));
