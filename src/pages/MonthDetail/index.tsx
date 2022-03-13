@@ -21,6 +21,20 @@ type seriesTimes = {
   notSeriesTimes: number;
 };
 
+type calendarData = {
+  day: number;
+  type: string;
+}[];
+
+const renderType = (day, type) => {
+  if (type === 'A') {
+    day.bottom = <text className="iconfont icon-jinghuaru"></text>;
+  } else {
+    day.bottom = <text className="iconfont icon-ruye"></text>;
+  }
+  day.children = type;
+};
+
 const MonthDetail: React.FC<MonthDetailProps> = props => {
   const punchInfo = props?.store?.Store.punchInfo;
 
@@ -28,6 +42,12 @@ const MonthDetail: React.FC<MonthDetailProps> = props => {
     seriesTimes: 0,
     notSeriesTimes: 0,
   });
+  const [calendarData, setCalendarData] = useState<calendarData>([
+    {
+      day: 0,
+      type: 'A',
+    },
+  ]);
 
   const fetchSeriesTimes = useCallback(() => {
     return Taro.cloud.callFunction({
@@ -39,8 +59,20 @@ const MonthDetail: React.FC<MonthDetailProps> = props => {
     });
   }, []);
 
+  const fetchRenderCalendar = useCallback(() => {
+    return Taro.cloud.callFunction({
+      name: 'daily_request',
+      data: {
+        function_name: 'renderCalendar',
+      },
+      success: (res: TaroGeneral.IAnyObject) =>
+        res?.result && setCalendarData(res.result.data),
+    });
+  }, []);
+
   useEffect(() => {
     fetchSeriesTimes();
+    fetchRenderCalendar();
   }, []);
 
   const totalNums = [
@@ -70,19 +102,12 @@ const MonthDetail: React.FC<MonthDetailProps> = props => {
     }
 
     const date = day.value.getDate();
-    // if (date === initUseDate?.day) {
-    //   day.bottom = <text className="iconfont icon-jinghuaru"></text>;
-    // }
 
-    // initUseDate?.A?.map(item => {
-    //   date === item &&
-    //     (day.bottom = <text className="iconfont icon-jinghuaru"></text>);
-    // });
-
-    // initUseDate?.C?.map(item => {
-    //   date === item &&
-    //     (day.bottom = <text className="iconfont icon-ruye"></text>);
-    // });
+    calendarData.map(item => {
+      if (date === item.day) {
+        renderType(day, item.type);
+      }
+    });
 
     return day;
   };
@@ -96,7 +121,7 @@ const MonthDetail: React.FC<MonthDetailProps> = props => {
               return (
                 <Flex.Item className="totalText" key={item.id}>
                   <text>{item.text}</text>
-                  <text>{item.num?.toString() || '-'}</text>
+                  <text>{item.num || '-'}</text>
                   <text>{item.unit}</text>
                 </Flex.Item>
               );

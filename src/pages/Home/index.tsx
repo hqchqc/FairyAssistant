@@ -1,4 +1,4 @@
-import { Flex } from '@taroify/core';
+import { Flex, Toast } from '@taroify/core';
 import CatchPhrase from './components/CatchPhrase/CatchPhrase';
 import CumulativeClock from './components/CumulativeClock/CumulativeClock';
 import Medal from './components/Medal/Medal';
@@ -15,6 +15,8 @@ interface IndexProps {
     Store: {
       savePunchInfo: (punchInfo: detailTimes) => void;
       saveTotalTimes: (totalTimes: string) => void;
+      isLogin: boolean;
+      selectedTab: (tabbar: string) => void;
     };
   };
 }
@@ -22,7 +24,7 @@ interface IndexProps {
 const Index: React.FC<IndexProps> = props => {
   const {
     store: {
-      Store: { savePunchInfo, saveTotalTimes },
+      Store: { savePunchInfo, saveTotalTimes, isLogin, selectedTab },
     },
   } = props;
 
@@ -46,10 +48,23 @@ const Index: React.FC<IndexProps> = props => {
     });
   }, []);
 
-  useEffect(() => {
-    fetchRecordTotal();
-    fetchDetailTimes();
+  const handleIsLogin = useCallback(() => {
+    const userInfo = Taro.getStorageSync('userInfo');
+    if (userInfo) {
+      fetchRecordTotal();
+      fetchDetailTimes();
+    } else {
+      Toast.fail('请先登录~');
+      Taro.switchTab({
+        url: `/pages/MyInfo/index`,
+      });
+      selectedTab('MyInfo');
+    }
   }, []);
+
+  useEffect(() => {
+    handleIsLogin();
+  }, [isLogin]);
 
   return (
     <view>
@@ -68,6 +83,8 @@ const Index: React.FC<IndexProps> = props => {
 
         {/* 第五部分 名言警句 */}
         <CatchPhrase />
+
+        <Toast id="toast" />
       </Flex>
     </view>
   );

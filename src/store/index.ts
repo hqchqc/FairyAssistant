@@ -13,6 +13,7 @@ class Store {
     yearTimes: 0,
     monthTimes: 0,
   };
+  @observable isLogin = false;
 
   @action.bound
   selectedTab(tabbar: string) {
@@ -27,6 +28,11 @@ class Store {
   @action.bound
   savePunchInfo(punchInfo: detailTimes) {
     this.punchInfo = punchInfo;
+  }
+
+  @action.bound
+  handleIsLogin(isLogin: boolean) {
+    this.isLogin = isLogin;
   }
 }
 

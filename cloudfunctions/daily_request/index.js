@@ -23,8 +23,17 @@ exports.main = async (event, context) => {
     }
     // 2. 查询今年、本月、本周打卡次数
     if (event.function_name === 'detailTimes') {
-      const start = dayjs().startOf('week').add(1, 'day').format('YYYY-MM-DD');
-      const end = dayjs().endOf('week').add(1, 'day').format('YYYY-MM-DD');
+      // 如果是周日要特殊处理 否则会算到下一周
+      const weekDay = dayjs().day();
+      const start =
+        weekDay === 0
+          ? dayjs().subtract(6, 'day').format('YYYY-MM-DD')
+          : dayjs().startOf('week').add(1, 'day').format('YYYY-MM-DD');
+      const end =
+        weekDay === 0
+          ? dayjs().format('YYYY-MM-DD')
+          : dayjs().endOf('week').add(1, 'day').format('YYYY-MM-DD');
+
       const weekTimes = (
         await db
           .collection(COLLECTION)
@@ -115,6 +124,72 @@ exports.main = async (event, context) => {
           month: dayjs().month() + 1,
         })
         .get();
+    }
+    // 5. 查询今日是否打卡
+    if (event.function_name === 'isClockIn') {
+      const isClcokIn = (
+        await db
+          .collection(COLLECTION)
+          .where({
+            _openid: wxContext.OPENID,
+            day: dayjs().date(),
+            month: dayjs().month() + 1,
+          })
+          .count()
+      ).total
+        ? true
+        : false;
+      return isClcokIn;
+    }
+    // 6. 打卡
+    if (event.function_name === 'clockIn') {
+      const { type } = event;
+      let data = {};
+
+      const isClockInToday = (
+        await db
+          .collection(COLLECTION)
+          .where({
+            _openid: wxContext.OPENID,
+            day: dayjs().date(),
+            month: dayjs().month() + 1,
+          })
+          .count()
+      ).total
+        ? true
+        : false;
+
+      if (!isClockInToday) {
+        const result = await db.collection(COLLECTION).add({
+          data: {
+            _openid: wxContext.OPENID,
+            year: dayjs().year(),
+            day: dayjs().date(),
+            month: dayjs().month() + 1,
+            date: dayjs().format('YYYY-MM-DD'),
+            type,
+          },
+        });
+
+        if (result._id) {
+          data = {
+            state: 'SUCCESS',
+          };
+        } else {
+          data = {
+            state: 'FAILED',
+            message: res,
+          };
+        }
+
+        return data;
+      } else {
+        data = {
+          state: 'FAILED',
+          message: '今天已经打过卡了哦！',
+        };
+      }
+      return data;
     }
   } catch (e) {
     return e;

@@ -7,27 +7,36 @@ import { Button, Toast } from '@taroify/core';
 import { observer, inject } from 'mobx-react';
 import './index.less';
 
-interface MyInfoProps {}
+interface MyInfoProps {
+  store: {
+    Store: {
+      isLogin: boolean;
+      handleIsLogin: (isLogin: boolean) => void;
+    };
+  };
+}
 
 type userInfo = {
   avatarUrl: string;
   nickName: string;
 };
 
-const MyInfo: React.FC<MyInfoProps> = () => {
+const MyInfo: React.FC<MyInfoProps> = props => {
+  const isLogin = props?.store?.Store.isLogin;
+  const handleIsLogin = props?.store?.Store.handleIsLogin;
+
   const [userInfo, setUserInfo] = useState<userInfo>({
     avatarUrl: '',
     nickName: '',
   });
-  const [isLogin, setIsLogin] = useState(false);
 
   useEffect(() => {
     const userInfo = Taro.getStorageSync('userInfo');
     if (userInfo) {
       setUserInfo(userInfo);
-      setIsLogin(true);
+      handleIsLogin(true);
     } else {
-      setIsLogin(false);
+      handleIsLogin(false);
     }
   }, []);
 
@@ -40,18 +49,18 @@ const MyInfo: React.FC<MyInfoProps> = () => {
           data: res.userInfo,
         });
         setUserInfo(res.userInfo);
-        setIsLogin(true);
+        handleIsLogin(true);
         Toast.success('登录成功！');
       },
-      fail: res => Toast.fail('登录失败！请授权~'),
+      fail: () => Toast.fail('登录失败！请授权~'),
     });
   };
 
   const handleLogOut = () => {
     Taro.removeStorage({
       key: 'userInfo',
-      success: res => {
-        setIsLogin(false);
+      success: () => {
+        handleIsLogin(false);
         setUserInfo({
           avatarUrl: '',
           nickName: '',
