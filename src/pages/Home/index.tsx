@@ -18,6 +18,7 @@ interface IndexProps {
       saveTotalTimes: (totalTimes: string) => void;
       isLogin: boolean;
       selectedTab: (tabbar: string) => void;
+      isClockIn: boolean;
     };
   };
 }
@@ -25,7 +26,7 @@ interface IndexProps {
 const Index: React.FC<IndexProps> = props => {
   const {
     store: {
-      Store: { savePunchInfo, saveTotalTimes, isLogin, selectedTab },
+      Store: { savePunchInfo, saveTotalTimes, isLogin, selectedTab, isClockIn },
     },
   } = props;
 
@@ -65,7 +66,7 @@ const Index: React.FC<IndexProps> = props => {
 
   useEffect(() => {
     handleIsLogin();
-  }, [isLogin]);
+  }, [isLogin, isClockIn]);
 
   return (
     <view>

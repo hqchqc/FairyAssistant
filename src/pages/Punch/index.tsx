@@ -11,12 +11,14 @@ interface PunchProps {
   store: {
     Store: {
       selectedTab: (tabbar: string) => void;
+      handleIsClockIn: (isClockIn: boolean) => void;
     };
   };
 }
 
 const Punch: React.FC<PunchProps> = props => {
   const selectedTab = props?.store?.Store.selectedTab;
+  const handleIsClockIn = props.store.Store.handleIsClockIn;
 
   const handleSubmit = useCallback((type: string) => {
     Taro.cloud.callFunction({
@@ -32,6 +34,7 @@ const Punch: React.FC<PunchProps> = props => {
             url: `/pages/Home/index`,
           });
           selectedTab('Home');
+          handleIsClockIn(true);
         } else {
           Toast.fail(res.result.message || '打卡失败~');
         }

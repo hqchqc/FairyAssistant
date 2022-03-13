@@ -14,6 +14,7 @@ class Store {
     monthTimes: 0,
   };
   @observable isLogin = false;
+  @observable isClockIn = false;
 
   @action.bound
   selectedTab(tabbar: string) {
@@ -33,6 +34,11 @@ class Store {
   @action.bound
   handleIsLogin(isLogin: boolean) {
     this.isLogin = isLogin;
+  }
+
+  @action.bound
+  handleIsClockIn(isClockIn: boolean) {
+    this.isClockIn = isClockIn;
   }
 }
 

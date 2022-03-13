@@ -20,7 +20,7 @@ sr.init({
   /**
    * 微信小程序appID，以wx开头
    */
-  appid: 'wx2063cceed62f68d0',
+  appid: 'wx2ec03f530071bcfc',
 
   /**
    * 如果使用了小程序插件，需要设置为 true
@@ -62,7 +62,7 @@ class App extends Component {
   componentDidMount() {
     if (process.env.TARO_ENV === 'weapp') {
       Taro.cloud.init({
-        env: 'cloud1-5gj5t7w004a5cddc', // 云开发环境ID
+        env: 'cloud-dev-2gauh3bdfcaf8597', // 云开发环境ID
       });
     }
   }
