@@ -27,4 +27,5 @@ export default {
     navigationBarTitleText: 'WeChat',
     navigationBarTextStyle: 'black',
   },
+  lazyCodeLoading: 'requiredComponents',
 };

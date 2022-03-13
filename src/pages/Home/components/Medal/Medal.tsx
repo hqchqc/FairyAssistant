@@ -1,10 +1,6 @@
 import { Flex, Image } from '@taroify/core';
 import { Swiper, SwiperItem } from '@tarojs/components';
 import { useEffect, useState } from 'react';
-import pic_one from '@assets/Illustration/01.svg';
-import pic_two from '@assets/Illustration/02.svg';
-import pic_three from '@assets/Illustration/03.svg';
-import pic_four from '@assets/Illustration/04.svg';
 import './Medal.less';
 
 interface MedalProps {}
@@ -16,19 +12,23 @@ const Medal: React.FC<MedalProps> = () => {
 
   const posterList = [
     {
-      imageA: pic_one,
+      imageA:
+        'https://wx4.sinaimg.cn/mw2000/006TdVgDgy1h088nf4z9oj30e80e840f.jpg',
       id: 1,
     },
     {
-      imageA: pic_two,
+      imageA:
+        'https://wx4.sinaimg.cn/mw2000/006TdVgDgy1h088nfbsztj30e80e8myv.jpg',
       id: 2,
     },
     {
-      imageA: pic_three,
+      imageA:
+        'https://wx3.sinaimg.cn/mw2000/006TdVgDgy1h088nfl8myj30e80e8dhq.jpg',
       id: 3,
     },
     {
-      imageA: pic_four,
+      imageA:
+        'https://wx2.sinaimg.cn/mw2000/006TdVgDgy1h088nfs57tj30e80e8jts.jpg',
       id: 4,
     },
   ];

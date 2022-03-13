@@ -1,6 +1,5 @@
 import { Flex } from '@taroify/core';
 import { Image } from '@tarojs/components';
-import fightPic from '@assets/Illustration/fight_boy.svg';
 import { observer, inject } from 'mobx-react';
 import './index.less';
 import { detailTimes } from 'src/store';
@@ -19,6 +18,9 @@ const YearDetail: React.FC<YearDetailProps> = props => {
       Store: { punchInfo },
     },
   } = props;
+
+  const IMGSRC =
+    'https://wx3.sinaimg.cn/mw2000/006TdVgDgy1h088ng4jv1j30dw0dwaas.jpg';
 
   const totalNums = [
     {
@@ -46,7 +48,7 @@ const YearDetail: React.FC<YearDetailProps> = props => {
           </Flex>
         </Flex.Item>
         <Flex.Item>
-          <Image className="totalPic" src={fightPic} mode="widthFix" />
+          <Image className="totalPic" src={IMGSRC} mode="widthFix" />
         </Flex.Item>
       </Flex>
     </view>

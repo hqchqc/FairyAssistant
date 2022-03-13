@@ -1,7 +1,5 @@
 import { Flex, Button } from '@taroify/core';
 import { Image } from '@tarojs/components';
-import weepPic from '@assets/Illustration/weep.svg';
-import punch from '@assets/Illustration/punch.svg';
 import CatchPhrase from '../Home/components/CatchPhrase/CatchPhrase';
 import dayjs from 'dayjs';
 import Taro from '@tarojs/taro';
@@ -12,7 +10,10 @@ interface WeekDetailProps {}
 
 const WeekDetail: React.FC<WeekDetailProps> = () => {
   const PATH = '/pages/Punch/index';
-
+  const PUNCHSRC =
+    'https://wx2.sinaimg.cn/mw2000/006TdVgDgy1h088npo7ucj30go0gogmf.jpg';
+  const WEEPSRC =
+    'https://wx2.sinaimg.cn/mw2000/006TdVgDgy1h088psb0ohj30sg0sgmyz.jpg';
   const [isClockIn, setIsClockIn] = useState(false);
 
   const fetchIsClockIn = useCallback(() => {
@@ -35,7 +36,7 @@ const WeekDetail: React.FC<WeekDetailProps> = () => {
         <Flex.Item>
           <Image
             className="totalPic"
-            src={isClockIn ? punch : weepPic}
+            src={isClockIn ? PUNCHSRC : WEEPSRC}
             mode="heightFix"
           />
         </Flex.Item>

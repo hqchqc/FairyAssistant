@@ -1,6 +1,5 @@
 import { Calendar, Flex, Tabs } from '@taroify/core';
 import { Image } from '@tarojs/components';
-import fightPic from '@assets/Illustration/fight.svg';
 import { observer, inject } from 'mobx-react';
 import dayjs from 'dayjs';
 import './index.less';
@@ -37,6 +36,9 @@ const renderType = (day, type) => {
 
 const MonthDetail: React.FC<MonthDetailProps> = props => {
   const punchInfo = props?.store?.Store.punchInfo;
+
+  const FIGHTIMGSRC =
+    'https://wx3.sinaimg.cn/mw2000/006TdVgDgy1h0892vb6zij30fs0dmdjb.jpg';
 
   const [seriesTimes, setSeriesTimes] = useState<seriesTimes>({
     seriesTimes: 0,
@@ -129,7 +131,7 @@ const MonthDetail: React.FC<MonthDetailProps> = props => {
           </Flex>
         </Flex.Item>
         <Flex.Item>
-          <Image className="totalPic" src={fightPic} mode="widthFix" />
+          <Image className="totalPic" src={FIGHTIMGSRC} mode="widthFix" />
         </Flex.Item>
       </Flex>
 

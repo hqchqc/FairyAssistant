@@ -1,4 +1,4 @@
-import { Flex, Toast } from '@taroify/core';
+import { Toast } from '@taroify/core';
 import CatchPhrase from './components/CatchPhrase/CatchPhrase';
 import CumulativeClock from './components/CumulativeClock/CumulativeClock';
 import Medal from './components/Medal/Medal';
@@ -9,6 +9,7 @@ import './index.less';
 import { useCallback, useEffect } from 'react';
 import Taro from '@tarojs/taro';
 import { detailTimes } from 'src/store';
+import Flex from '@taroify/core/flex/flex';
 
 interface IndexProps {
   store: {
