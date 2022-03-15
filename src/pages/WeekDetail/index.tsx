@@ -32,21 +32,23 @@ const WeekDetail: React.FC<WeekDetailProps> = () => {
 
   return (
     <view>
-      <Flex direction="column" align="center" className="weekendCrad">
-        <Flex.Item>
-          <Image
-            className="totalPic"
-            src={isClockIn ? PUNCHSRC : WEEPSRC}
-            mode="heightFix"
-          />
-        </Flex.Item>
-        <Flex.Item>
-          {isClockIn ? (
-            <text>今天已经打卡啦</text>
-          ) : (
-            <text>嘿，猪猪女孩，今天还没打卡呦~</text>
-          )}
-        </Flex.Item>
+      <Flex direction="column" align="center">
+        <view className="weekendCrad">
+          <Flex.Item>
+            <Image
+              className="totalPic"
+              src={isClockIn ? PUNCHSRC : WEEPSRC}
+              mode="heightFix"
+            />
+          </Flex.Item>
+          <Flex.Item>
+            {isClockIn ? (
+              <text>今天已经打卡啦</text>
+            ) : (
+              <text>嘿，猪猪女孩，今天还没打卡呦~</text>
+            )}
+          </Flex.Item>
+        </view>
       </Flex>
       {!isClockIn && (
         <Flex justify="center">
