@@ -1,4 +1,3 @@
-import { Toast } from '@taroify/core';
 import CatchPhrase from './components/CatchPhrase/CatchPhrase';
 import CumulativeClock from './components/CumulativeClock/CumulativeClock';
 import Medal from './components/Medal/Medal';
@@ -56,11 +55,19 @@ const Index: React.FC<IndexProps> = props => {
       fetchRecordTotal();
       fetchDetailTimes();
     } else {
-      Toast.fail('请先登录~');
-      Taro.switchTab({
-        url: `/pages/MyInfo/index`,
+      Taro.showToast({
+        title: '请先登录~',
+        icon: 'error',
+        duration: 1000,
+        success: () => {
+          setTimeout(() => {
+            Taro.switchTab({
+              url: `/pages/MyInfo/index`,
+            });
+            selectedTab('MyInfo');
+          }, 1000);
+        },
       });
-      selectedTab('MyInfo');
     }
   }, []);
 
@@ -85,8 +92,6 @@ const Index: React.FC<IndexProps> = props => {
 
         {/* 第五部分 名言警句 */}
         <CatchPhrase />
-
-        <Toast id="toast" />
       </Flex>
     </view>
   );

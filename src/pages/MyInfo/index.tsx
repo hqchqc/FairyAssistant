@@ -3,7 +3,7 @@ import { Image } from '@tarojs/components';
 import { useEffect, useState } from 'react';
 import avatarFrameImg from '@assets/img/avatarFrame.svg';
 import avatarImg from '@assets/img/avatar.svg';
-import { Button, Toast } from '@taroify/core';
+import { Button } from '@taroify/core';
 import { observer, inject } from 'mobx-react';
 import './index.less';
 
@@ -44,15 +44,28 @@ const MyInfo: React.FC<MyInfoProps> = props => {
     Taro.getUserProfile({
       desc: '用于登录小程序',
       success: res => {
-        Taro.setStorage({
-          key: 'userInfo',
-          data: res.userInfo,
+        Taro.showToast({
+          title: '登录成功！',
+          icon: 'success',
+          duration: 2000,
+          success: () => {
+            setTimeout(() => {
+              Taro.setStorage({
+                key: 'userInfo',
+                data: res.userInfo,
+              });
+              setUserInfo(res.userInfo);
+              handleIsLogin(true);
+            }, 2000);
+          },
         });
-        setUserInfo(res.userInfo);
-        handleIsLogin(true);
-        Toast.success('登录成功！');
       },
-      fail: () => Toast.fail('登录失败！请授权~'),
+      fail: () =>
+        Taro.showToast({
+          title: '登录失败',
+          icon: 'error',
+          duration: 2000,
+        }),
     });
   };
 
@@ -85,8 +98,6 @@ const MyInfo: React.FC<MyInfoProps> = props => {
           </Button>
         )}
       </view>
-
-      <Toast id="toast" />
     </>
   );
 };

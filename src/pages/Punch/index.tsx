@@ -1,4 +1,4 @@
-import { Button, Form, Radio, Toast } from '@taroify/core';
+import { Button, Form, Radio } from '@taroify/core';
 import { BaseEventOrig } from '@tarojs/components/types/common';
 import { FormProps } from '@tarojs/components/types/Form';
 import './index.less';
@@ -29,14 +29,26 @@ const Punch: React.FC<PunchProps> = props => {
       },
       success: (res: TaroGeneral.IAnyObject) => {
         if (res.result.state === 'SUCCESS') {
-          Toast.success('打卡成功！');
-          Taro.switchTab({
-            url: `/pages/Home/index`,
+          Taro.showToast({
+            title: '打卡成功！',
+            icon: 'success',
+            duration: 1000,
+            success: () => {
+              setTimeout(() => {
+                Taro.switchTab({
+                  url: `/pages/Home/index`,
+                });
+                selectedTab('Home');
+                handleIsClockIn(true);
+              }, 1000);
+            },
           });
-          selectedTab('Home');
-          handleIsClockIn(true);
         } else {
-          Toast.fail(res.result.message || '打卡失败~');
+          Taro.showToast({
+            title: res.result.message || '打卡失败~',
+            icon: 'error',
+            duration: 2000,
+          });
         }
       },
     });
@@ -71,8 +83,6 @@ const Punch: React.FC<PunchProps> = props => {
           </Button>
         </View>
       </Form>
-
-      <Toast id="toast" />
     </>
   );
 };
