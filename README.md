@@ -18,10 +18,8 @@
 ### 项目后续  
 📝目前还有一些小的bug，在弹窗交互这块，不过问题不大，后续会改一下，想做的功能还有很多，欢迎各位Star✨呀，另外有问题也欢迎大家提issue哈~  
 
-
 ### 欢迎大家打卡呀
 ![code](https://raw.githubusercontent.com/hqchqc/staticRepo/master/images/code.png)  
-
 ### 几张截图  
 ![cal](https://raw.githubusercontent.com/hqchqc/staticRepo/master/images/cal.jpg)  
 
